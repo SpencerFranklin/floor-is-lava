@@ -1,1 +1,7 @@
 Elizabeth Renn - title screen, level design
+
+Spencer Franklin:
+  - Game Art (sprite collection and seperation)
+  - Animated lava sprite
+  - Level Design 
+  - UI design
