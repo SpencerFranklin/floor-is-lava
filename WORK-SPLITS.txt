@@ -5,3 +5,9 @@ Spencer Franklin:
   - Animated lava sprite
   - Level Design 
   - UI design
+
+Max Rais:
+-Design Doc
+-Character Controller configuration
+-Camera and endgame setup
+-Level Design and UI
