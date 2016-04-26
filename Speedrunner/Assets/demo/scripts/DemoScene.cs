@@ -127,7 +127,6 @@ public class DemoScene : MonoBehaviour
 		// this lets uf jump down through one way platforms
 		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
 		{
-			_velocity.y *= 3f;
 			_controller.ignoreOneWayPlatformsThisFrame = true;
 		}
 
