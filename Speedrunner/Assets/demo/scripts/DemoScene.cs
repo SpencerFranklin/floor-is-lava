@@ -12,6 +12,7 @@ public class DemoScene : MonoBehaviour
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
+	public float bouncePower = 20f;
 	public Text timer;
 
 	[HideInInspector]
@@ -51,7 +52,10 @@ public class DemoScene : MonoBehaviour
 
 	void onTriggerEnterEvent( Collider2D col )
 	{
-		gameEnd(true);
+		if(col.tag == "Win")			//For win colliders
+			gameEnd(true);
+		if (col.tag == "Bounce")		//For anything bouncy
+			_velocity.y = bouncePower;
 		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
 	}
 
