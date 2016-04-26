@@ -12,7 +12,6 @@ public class DemoScene : MonoBehaviour
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
-	public float bouncePower = 20f;
 	public Text timer;
 
 	[HideInInspector]
@@ -52,10 +51,7 @@ public class DemoScene : MonoBehaviour
 
 	void onTriggerEnterEvent( Collider2D col )
 	{
-		if(col.tag == "Win")
-			gameEnd(true);
-		if (col.tag == "Bounce")
-			_velocity.y = bouncePower;
+		gameEnd(true);
 		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
 	}
 
@@ -127,6 +123,7 @@ public class DemoScene : MonoBehaviour
 		// this lets uf jump down through one way platforms
 		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
 		{
+			_velocity.y *= 3f;
 			_controller.ignoreOneWayPlatformsThisFrame = true;
 		}
 
@@ -161,6 +158,7 @@ public class DemoScene : MonoBehaviour
 		time = 0;
 		timer.enabled = true;
 		gameOver = false;
+		Camera.main.GetComponent<SmoothFollow>().updateCameraPosition(true);
 	}
 
 }
