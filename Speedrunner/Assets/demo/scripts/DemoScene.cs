@@ -13,6 +13,8 @@ public class DemoScene : MonoBehaviour
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
 	public float bouncePower = 20f;
+	public float bouncePower2 = 20f;
+
 	public Text timer;
 
 	[HideInInspector]
@@ -56,6 +58,8 @@ public class DemoScene : MonoBehaviour
 			gameEnd(true);
 		if (col.tag == "Bounce")		//For anything bouncy
 			_velocity.y = bouncePower;
+		if (col.tag == "Bounce2")		
+			_velocity.y = bouncePower2;
 		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
 	}
 
