@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DisplayScores : MonoBehaviour {
 
@@ -20,5 +21,14 @@ public class DisplayScores : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Escape))
 			Application.Quit ();
+	}
+
+	public void Replay(int level) {
+		scoreKeeper.GetComponent<KeepScore>().isReplaying = true;
+		SceneManager.LoadScene (level);
+	}
+	public void Restart() {
+		scoreKeeper.GetComponent<KeepScore>().isReplaying = false;
+		SceneManager.LoadScene (1);
 	}
 }

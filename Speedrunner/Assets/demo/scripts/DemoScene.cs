@@ -29,6 +29,7 @@ public class DemoScene : MonoBehaviour
 	private bool gameOver;
 	private float time;
 	private GameObject scoreKeep;
+	private Queue positions;
 
 	void Awake()
 	{
@@ -40,7 +41,12 @@ public class DemoScene : MonoBehaviour
 		_controller.onTriggerEnterEvent += onTriggerEnterEvent;
 		_controller.onTriggerExitEvent += onTriggerExitEvent;
 		scoreKeep = GameObject.Find ("ScoreKeeper");
-
+		if (scoreKeep.GetComponent<KeepScore> ().isReplaying) {
+			this.GetComponent<ReplayBot> ().enabled = true;
+			this.GetComponent<Collider2D> ().enabled = false;
+			this.enabled = false;
+		}
+		positions = new Queue ();
 	}
 
 
@@ -51,8 +57,6 @@ public class DemoScene : MonoBehaviour
 		// bail out on plain old ground hits cause they arent very interesting
 		if( hit.normal.y == 1f )
 			return;
-		if (hit.collider.tag == "Win")
-			gameEnd (true);
 		// logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
 		//Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
 	}
@@ -81,6 +85,7 @@ public class DemoScene : MonoBehaviour
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+		positions.Enqueue (transform.position);
 		time += Time.deltaTime;
 		timer.text = string.Format("{0:0}:{1:00}", Mathf.Floor(time/60), time % 60);
 		levelScores.text = "";
@@ -97,6 +102,10 @@ public class DemoScene : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.R)) {
 			restart ();
 		}
+
+		/*if (Input.GetKeyDown (KeyCode.Z)) {   //For Debugging
+			gameEnd (true);
+		}*/
 		if (Input.GetKeyDown (KeyCode.Escape))
 			Application.Quit ();
 
@@ -166,8 +175,10 @@ public class DemoScene : MonoBehaviour
 	}
 
 	public void gameEnd(bool won) {
-		if(won)
-			scoreKeep.GetComponent<KeepScore> ().AddScore (SceneManager.GetActiveScene ().buildIndex - 1, string.Format("{0:#,###.##}", time));
+		if (won) {
+			scoreKeep.GetComponent<KeepScore> ().AddScore (SceneManager.GetActiveScene ().buildIndex - 1, string.Format ("{0:#,###.##}", time));
+			scoreKeep.GetComponent<KeepScore> ().AddReplay (SceneManager.GetActiveScene ().buildIndex - 1, positions);
+		}
 		GameObject end = GameObject.Find("EndGame");
 		Image img = end.GetComponentInChildren<Image>();
 		Text txt = end.GetComponentInChildren<Text>();
