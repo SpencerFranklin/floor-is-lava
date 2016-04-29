@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using Prime31;
+using UnityEngine.SceneManagement;
 
 
 public class DemoScene : MonoBehaviour
@@ -16,6 +17,7 @@ public class DemoScene : MonoBehaviour
 	public float bouncePower2 = 20f;
 
 	public Text timer;
+	public Text levelScores;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -26,6 +28,7 @@ public class DemoScene : MonoBehaviour
 	private Vector3 _velocity;
 	private bool gameOver;
 	private float time;
+	private GameObject scoreKeep;
 
 	void Awake()
 	{
@@ -36,6 +39,8 @@ public class DemoScene : MonoBehaviour
 		_controller.onControllerCollidedEvent += onControllerCollider;
 		_controller.onTriggerEnterEvent += onTriggerEnterEvent;
 		_controller.onTriggerExitEvent += onTriggerExitEvent;
+		scoreKeep = GameObject.Find ("ScoreKeeper");
+
 	}
 
 
@@ -46,7 +51,8 @@ public class DemoScene : MonoBehaviour
 		// bail out on plain old ground hits cause they arent very interesting
 		if( hit.normal.y == 1f )
 			return;
-
+		if (hit.collider.tag == "Win")
+			gameEnd (true);
 		// logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
 		//Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
 	}
@@ -77,12 +83,19 @@ public class DemoScene : MonoBehaviour
 	{
 		time += Time.deltaTime;
 		timer.text = string.Format("{0:0}:{1:00}", Mathf.Floor(time/60), time % 60);
+		levelScores.text = "";
+		for (int i = 0; i < SceneManager.GetActiveScene ().buildIndex; i++)
+			levelScores.text += "Level " + (i + 1) + ":" + scoreKeep.GetComponent<KeepScore> ().GetLevelScore (i) + " ";
 
 		if( _controller.isGrounded )
 			_velocity.y = 0;
 
 		if(_controller.gameObject.transform.position.y < -3 && !gameOver) {
 			gameEnd(false);
+		}
+
+		if (Input.GetKeyDown (KeyCode.R)) {
+			restart ();
 		}
 
 		if( Input.GetKey( KeyCode.RightArrow ) )
@@ -129,12 +142,21 @@ public class DemoScene : MonoBehaviour
 
 		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
 		// this lets uf jump down through one way platforms
-		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
+		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) && !Input.GetKey(KeyCode.UpArrow) )
 		{
 			_velocity.y *= 3f;
 			_controller.ignoreOneWayPlatformsThisFrame = true;
 		}
-
+		if (_controller.collisionState.right || _controller.collisionState.left)
+			_velocity.y /= 1.05f;
+		if (_controller.collisionState.right && Input.GetKey (KeyCode.UpArrow)) {
+			_velocity.x = -10;
+			_velocity.y = 10;
+		}
+		if (_controller.collisionState.left && Input.GetKey (KeyCode.UpArrow)) {
+			_velocity.x = 10;
+			_velocity.y = 10;
+		}
 		_controller.move( _velocity * Time.deltaTime );
 
 		// grab our current _velocity to use as a base for all calculations
@@ -142,10 +164,12 @@ public class DemoScene : MonoBehaviour
 	}
 
 	public void gameEnd(bool won) {
+		if(won)
+			scoreKeep.GetComponent<KeepScore> ().AddScore (SceneManager.GetActiveScene ().buildIndex - 1, string.Format("{0:#,###.##}", time));
 		GameObject end = GameObject.Find("EndGame");
 		Image img = end.GetComponentInChildren<Image>();
 		Text txt = end.GetComponentInChildren<Text>();
-		GameObject btn = end.transform.FindChild("Button").gameObject;
+		GameObject btn = (won ? end.transform.FindChild("NextLevel").gameObject : end.transform.FindChild("Replay").gameObject);
 		txt.text = (won ? "Game Over! \n You won!" : "Game Over! \n You lost!");
 		img.enabled = true;
 		txt.enabled = true;
@@ -155,18 +179,12 @@ public class DemoScene : MonoBehaviour
 	}
 
 	public void restart() {
-		this.transform.position = new Vector3(-5, 1, 0);
-		GameObject end = GameObject.Find("EndGame");
-		Image img = end.GetComponentInChildren<Image>();
-		Text txt = end.GetComponentInChildren<Text>();
-		GameObject btn = end.transform.FindChild("Button").gameObject;
-		img.enabled = false;
-		txt.enabled = false;
-		btn.SetActive(false);
-		time = 0;
-		timer.enabled = true;
-		gameOver = false;
-		Camera.main.GetComponent<SmoothFollow>().updateCameraPosition(true);
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+	}
+
+	public void NextLevel() {
+		int lvl = SceneManager.GetActiveScene ().buildIndex;
+		SceneManager.LoadScene (lvl + 1);
 	}
 
 }
