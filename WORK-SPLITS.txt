@@ -11,3 +11,9 @@ Max Rais:
 -Character Controller configuration
 -Camera and endgame setup
 -Level Design and UI
+
+David Fasano:
+ -Level 3 Design
+ -Character controller tweaks - walljumps
+ -Bounce platforms
+ -Persistent score & music, level progression
