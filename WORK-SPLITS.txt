@@ -16,5 +16,5 @@ David Fasano:
  -Level 3 Design
  -Character controller tweaks - walljumps
  -Bounce platforms
- -Persistent score & music, level progression
+ -Level progression - keep track of times, keep audio playing, switch between scenes
  -Run replay system
