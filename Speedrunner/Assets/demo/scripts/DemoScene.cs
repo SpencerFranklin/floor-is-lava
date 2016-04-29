@@ -66,7 +66,7 @@ public class DemoScene : MonoBehaviour
 			_velocity.y = bouncePower;
 		if (col.tag == "Bounce2")		
 			_velocity.y = bouncePower2;
-		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
+		//Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
 	}
 
 
@@ -97,6 +97,8 @@ public class DemoScene : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.R)) {
 			restart ();
 		}
+		if (Input.GetKeyDown (KeyCode.Escape))
+			Application.Quit ();
 
 		if( Input.GetKey( KeyCode.RightArrow ) )
 		{
