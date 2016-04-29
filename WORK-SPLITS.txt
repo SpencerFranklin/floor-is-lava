@@ -1,4 +1,9 @@
-Elizabeth Renn - title screen, level design
+Elizabeth Renn:
+  - Title screen
+  - Level design
+  - UI fixes
+  - Setup Github repository and reorganized files
+  - 
 
 Spencer Franklin:
   - Game Art (sprite collection and seperation)
@@ -7,14 +12,17 @@ Spencer Franklin:
   - UI design
 
 Max Rais:
--Design Doc
--Character Controller configuration
--Camera and endgame setup
--Level Design and UI
+  - Design Doc
+  - Character Controller configuration
+  - Camera and endgame setup
+  - Level Design and UI
 
 David Fasano:
- -Level 3 Design
- -Character controller tweaks - walljumps
- -Bounce platforms
- -Level progression - keep track of times, keep audio playing, switch between scenes
- -Run replay system
+  - Level 3 Design
+  - Character controller tweaks - walljumps
+  - Bounce platforms
+  - Level progression 
+	- keep track of times
+	- keep audio playing
+	- switch between scenes
+  - Run replay system
