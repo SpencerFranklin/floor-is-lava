@@ -5,10 +5,12 @@ public class KeepScore : MonoBehaviour {
 
 	static ArrayList scoreList;
 
-	// Use this for initialization
+	void Start() {
+		scoreList = new ArrayList { "", "", "" };
+	}
+
 	void Awake () {
 		DontDestroyOnLoad (this);
-		scoreList = new ArrayList { "", "", "" };
 		if (FindObjectsOfType (GetType ()).Length > 1)
 			Destroy (gameObject);
 	}
