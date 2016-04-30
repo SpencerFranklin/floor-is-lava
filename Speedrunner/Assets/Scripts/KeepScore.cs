@@ -10,8 +10,8 @@ public class KeepScore : MonoBehaviour {
 
 	void Start() {
 		isReplaying = false;
-		scoreList = new ArrayList {"","",""};
-		replays = new ArrayList {new Queue(), new Queue(), new Queue()};
+		scoreList = new ArrayList {"","","",""};
+		replays = new ArrayList {new Queue(), new Queue(), new Queue(), new Queue()};
 	}
 
 	void Awake () {

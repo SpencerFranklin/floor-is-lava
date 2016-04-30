@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DisplayScores : MonoBehaviour {
 
-	public Text level1, level2, level3;
+	public Text level1, level2, level3, level4;
 	private GameObject scoreKeeper;
 
 	// Use this for initialization
@@ -14,6 +14,7 @@ public class DisplayScores : MonoBehaviour {
 		level1.text = "Level 1: " + scoreKeeper.GetComponent<KeepScore> ().GetLevelScore (0);
 		level2.text = "Level 2: " + scoreKeeper.GetComponent<KeepScore> ().GetLevelScore (1);
 		level3.text = "Level 3: " + scoreKeeper.GetComponent<KeepScore> ().GetLevelScore (2);
+		level4.text = "Level 4: " + scoreKeeper.GetComponent<KeepScore> ().GetLevelScore (3);
 
 	}
 	
