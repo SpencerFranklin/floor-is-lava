@@ -54,6 +54,10 @@ public class DemoScene : MonoBehaviour
 
 	void onControllerCollider( RaycastHit2D hit )
 	{
+		if (hit.collider.tag == "Sink") {
+			hit.collider.gameObject.GetComponent<SinkInLava> ().TriggerSink ();
+			_velocity.y = bouncePower;
+		}
 		// bail out on plain old ground hits cause they arent very interesting
 		if( hit.normal.y == 1f )
 			return;

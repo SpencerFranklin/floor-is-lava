@@ -1,5 +1,13 @@
 THE FLOOR IS LAVA
 
+Members:
+	Elizabeth Renn
+	Spencer Franklin
+	Max Rais
+	David Fasano
+
+CONTROLS: Use the left and right arrow keys to move, up arrow key to jump, and the down arrow key to drop through platforms.
+
 TRAILER LINK: https://www.youtube.com/watch?v=9dwW9p_M6CY&feature=youtu.be
 
 SOURCES:   
