@@ -33,6 +33,7 @@ public class DemoScene : MonoBehaviour
 
 	void Awake()
 	{
+		Cursor.visible = false;
 		_animator = GetComponent<Animator>();
 		_controller = GetComponent<CharacterController2D>();
 
@@ -179,6 +180,7 @@ public class DemoScene : MonoBehaviour
 	}
 
 	public void gameEnd(bool won) {
+		Cursor.visible = true;
 		if (won) {
 			scoreKeep.GetComponent<KeepScore> ().AddScore (SceneManager.GetActiveScene ().buildIndex - 1, string.Format ("{0:#,###.##}", time));
 			scoreKeep.GetComponent<KeepScore> ().AddReplay (SceneManager.GetActiveScene ().buildIndex - 1, positions);
