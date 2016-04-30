@@ -10,6 +10,7 @@ public class DisplayScores : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Cursor.visible = true;
 		scoreKeeper = GameObject.Find ("ScoreKeeper");
 		level1.text = "Level 1: " + scoreKeeper.GetComponent<KeepScore> ().GetLevelScore (0);
 		level2.text = "Level 2: " + scoreKeeper.GetComponent<KeepScore> ().GetLevelScore (1);

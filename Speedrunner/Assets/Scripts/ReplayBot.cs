@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ReplayBot : MonoBehaviour {
 
-	public int level;
 	private GameObject scoreKeep;
 	private Queue positions;
 
 	// Use this for initialization
 	void Start () {
+		int level = SceneManager.GetActiveScene ().buildIndex;
 		scoreKeep = GameObject.Find ("ScoreKeeper");
 		positions = (Queue)scoreKeep.GetComponent<KeepScore> ().GetReplay (level - 1);
 	}

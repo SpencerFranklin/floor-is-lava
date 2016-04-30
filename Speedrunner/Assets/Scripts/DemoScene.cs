@@ -108,9 +108,9 @@ public class DemoScene : MonoBehaviour
 			restart ();
 		}
 
-		/*if (Input.GetKeyDown (KeyCode.Z)) {   //For Debugging
+		if (Input.GetKeyDown (KeyCode.Z)) {   //For Debugging
 			gameEnd (true);
-		}*/
+		}
 		if (Input.GetKeyDown (KeyCode.Escape))
 			Application.Quit ();
 
