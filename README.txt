@@ -7,6 +7,7 @@ Members:
 	David Fasano
 
 CONTROLS: Use the left and right arrow keys to move, up arrow key to jump, and the down arrow key to drop through platforms.
+	R key for restart and Escape key to quit.
 
 TRAILER LINK: https://www.youtube.com/watch?v=9dwW9p_M6CY&feature=youtu.be
 

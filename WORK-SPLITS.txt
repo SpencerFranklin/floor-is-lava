@@ -2,8 +2,8 @@ Elizabeth Renn:
   - Title screen
   - Level design
   - UI fixes
-  - Setup Github repository and reorganized files
   - Quick testing and bug fixes
+  - Sinking Objects
 
 Spencer Franklin:
   - Game Art (sprite collection and seperation)
