@@ -6,9 +6,9 @@ Elizabeth Renn:
   - Sinking Objects
 
 Spencer Franklin:
-  - Game Art (sprite collection and seperation)
+  - Game Art (extensive sprite collection and seperation)
   - Animated lava sprite
-  - Level Design 
+  - Level Design (bouncy level)
   - UI design
 
 Max Rais:
